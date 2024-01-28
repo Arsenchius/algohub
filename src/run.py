@@ -19,6 +19,7 @@ def objective(trial: Trial, df: pd.DataFrame, features: list[str], number_of_spl
     df = df.sort_index()
 
     params = {
+        'device': "gpu",
         'objective': 'multiclass',
         'metric': 'multi_logloss',
         'num_class': 3,
