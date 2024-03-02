@@ -29,21 +29,21 @@ class Simple(Strategy):
 
         self.forecasts[-1] = forecast
         # print(forecast)
-        if forecast == 2 and not self.position.is_short:
-            # print("bp_2")
-            self.position.close()
-            self.sell(
-                size=self.size,
-                sl=close_price * self.sl_short,
-                tp=close_price * self.tp_short,
-            )
-        elif forecast == 0 and not self.position.is_long:
-            # print("bp_1")
+        if forecast == 2 and not self.position.is_long:
+            print("bp_2")
             self.position.close()
             self.buy(
                 size=self.size,
                 sl=close_price * self.sl_long,
                 tp=close_price * self.tp_long,
+            )
+        elif forecast == 0 and not self.position.is_short:
+            print("bp_1")
+            self.position.close()
+            self.sell(
+                size=self.size,
+                sl=close_price * self.sl_short,
+                tp=close_price * self.tp_short,
             )
 
         for trade in self.trades:

@@ -45,8 +45,9 @@ def resample_data(data, time_frames):
     return resampled_data
 
 
-def create_target(data, size):
-    data["next_price"] = data["Close"].shift(-1)
+def create_target(data, size, future_time=5):
+    shift_idx = int(-1 * future_time / 5)
+    data["next_price"] = data["Close"].shift(shift_idx)
     specific_value = (
         (0.0004 * data["Close"] + 0.0004 * data["next_price"]) * size / data["Close"]
     )
